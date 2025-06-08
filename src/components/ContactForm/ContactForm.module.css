@@ -1,0 +1,15 @@
+.container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.input {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  text-align: start;
+}
+.error {
+  color: red;
+}
