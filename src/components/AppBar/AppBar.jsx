@@ -1,7 +1,9 @@
+import Navigation from "../Navigation/Navigation";
+import AuthNav from "../AuthNav/AuthNav";
+import UserMenu from "../UserMenu/UserMenu";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
-import { NavLink } from "react-router-dom";
 
 export default function AppBar() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -9,22 +11,12 @@ export default function AppBar() {
   const dispatch = useDispatch();
 
   return (
-    <header>
-      <nav>
-        <NavLink to="/">Home</NavLink>
-        {isLoggedIn && <NavLink to="/contacts">Contacts</NavLink>}
-      </nav>
-
+    <header style={{ marginBottom: 20 }}>
+      <Navigation />
       {isLoggedIn ? (
-        <div>
-          <span>{user.email}</span>
-          <button onClick={() => dispatch(logout())}>Logout</button>
-        </div>
+        <UserMenu user={user} onLogout={() => dispatch(logout())} />
       ) : (
-        <nav>
-          <NavLink to="/login">Log In</NavLink>
-          <NavLink to="/register">Register</NavLink>
-        </nav>
+        <AuthNav />
       )}
     </header>
   );
